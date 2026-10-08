@@ -71,6 +71,10 @@ keymap.set("n", "<leader>i", function()
 	require("craftzdog.lsp").toggleInlayHints()
 end)
 
+keymap.set("n", "<leader>gm", function()
+	require("gitsigns").toggle_current_line_blame()
+end, { desc = "Toggle Git blame for current line" })
+
 vim.api.nvim_create_user_command("ToggleAutoformat", function()
 	require("craftzdog.lsp").toggleAutoformat()
 end, {})

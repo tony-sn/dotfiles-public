@@ -1,0 +1,30 @@
+{
+  "name": "friendly-snippets",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "plaintext",
+          "markdown",
+          "tex",
+          "html",
+          "global",
+          "all"
+        ],
+        "path": "../all/all.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "typescript",
+          "javascriptreact",
+          "typescriptreact"
+        ],
+        "path": "../javascript/javascript.json"
+      }
+    ]
+  }
+}

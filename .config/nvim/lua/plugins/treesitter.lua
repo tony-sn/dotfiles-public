@@ -3,6 +3,8 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		-- branch = "master",
+		-- version = "0.10.0",
 		build = ":TSUpdate",
 		opts = {
 			ensure_installed = {
@@ -16,11 +18,19 @@ return {
 				"graphql",
 				"http",
 				"java",
+				"javascript",
 				"php",
 				"rust",
 				"scss",
 				"sql",
 				"svelte",
+				"tsx",
+				"typescript",
+			},
+			--- @type Lazyvim.TSFeat
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
 			},
 
 			-- matchup = {

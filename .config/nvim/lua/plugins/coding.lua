@@ -45,6 +45,26 @@ return {
 		end,
 	},
 
+	{
+		"wakatime/vim-wakatime",
+		lazy = false,
+	},
+
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
+		config = function()
+			local vscode_snippets = require("luasnip.loaders.from_vscode")
+			local lua_snippets = require("luasnip.loaders.from_lua")
+
+			vscode_snippets.lazy_load()
+			vscode_snippets.lazy_load({ paths = vim.fn.stdpath("config") .. "/misc/snippets" })
+			lua_snippets.load({ paths = vim.fn.stdpath("config") .. "/misc/snippets" })
+		end,
+	},
+
 	-- copilot
 	{
 		"zbirenbaum/copilot.lua",

@@ -1,0 +1,199 @@
+{
+  "API controller methods": {
+    "prefix": "apic",
+    "body": [
+      "static async $1methodName(req, res, next) {",
+      "try {",
+      "$2",
+      "}",
+      "catch (e){",
+      "$3",
+      "}",
+      "}"
+    ],
+    "description": "Shortcut for static api methods"
+  },
+  "Input Process Output (IPO) Model ": {
+    "prefix": "ipo",
+    "body": [
+      "/*",
+      "PSEUDO:",
+      "",
+      "INPUT: $1",
+      "",
+      "PROCESS:",
+      "${3:- Step 1: }",
+      "${4:- Step 2: }",
+      "${5:- Step 3: }",
+      "",
+      "TODO:",
+      "${6:- [ ] Task 1}",
+      "${7:- [ ] Task 2}",
+      "${8:- [ ] Task 3}",
+      "",
+      "OUTPUT: $2",
+      "*/"
+    ],
+    "description": "Shortcut for pseudocode comments"
+  },
+  "Print styled log to console": {
+    "prefix": "slog",
+    "body": [
+      "console.log('%c $2 Log: ', 'color: $3; font-weight: 600', $1);",
+      "$0"
+    ],
+    "description": "Log styled output to console"
+  },
+  "Trace console log": {
+    "prefix": "logt",
+    "body": [
+      "console.trace('%c $2 Log: ', 'color: $3; font-weight: 600', $1);"
+    ],
+    "description": "trace console log"
+  },
+  "Performance Timer": {
+    "prefix": "logperf",
+    "body": [
+      "console.time('$1');",
+      "$2",
+      "console.timeEnd('$1');",
+      "$0"
+    ],
+    "description": "Measure execution time between two points"
+  },
+  "Debug Group": {
+    "prefix": "loggroup",
+    "body": [
+      "console.group('%c $1', 'color: $2; font-weight: 600');",
+      "$3",
+      "console.groupEnd();",
+      "$0"
+    ],
+    "description": "Group related debug logs together"
+  },
+  "Debug Group Collapsed": {
+    "prefix": "loggroupc",
+    "body": [
+      "console.groupCollapsed('%c $1', 'color: $2; font-weight: 600');",
+      "$3",
+      "console.groupEnd();",
+      "$0"
+    ],
+    "description": "Group related debug logs together (collapsed by default)"
+  },
+  "Object Deep Inspector": {
+    "prefix": "logdir",
+    "body": [
+      "console.log('%c $2 Object: ', 'color: $3; font-weight: 600');",
+      "console.dir($1, { depth: null, colors: true });",
+      "$0"
+    ],
+    "description": "Pretty print complex objects with full depth"
+  },
+  "Conditional Debug Log": {
+    "prefix": "logif",
+    "body": [
+      "if ($1) {",
+      "  console.log('%c $3 Debug: ', 'color: $4; font-weight: 600', $2);",
+      "}",
+      "$0"
+    ],
+    "description": "Log only when condition is met"
+  },
+  "Function Call Tracker": {
+    "prefix": "logfn",
+    "body": [
+      "console.log('%c → Entering $1', 'color: #4CAF50; font-weight: 600', { params: $2 });",
+      "$3",
+      "console.log('%c ← Exiting $1', 'color: #2196F3; font-weight: 600', { result: $4 });",
+      "$0"
+    ],
+    "description": "Track function entry and exit with parameters"
+  },
+  "Debug Table": {
+    "prefix": "logtable",
+    "body": [
+      "console.log('%c $2 Table: ', 'color: $3; font-weight: 600');",
+      "console.table($1);",
+      "$0"
+    ],
+    "description": "Display arrays or objects in table format"
+  },
+  "Assert with Message": {
+    "prefix": "logassert",
+    "body": [
+      "console.assert($1, '%c Assertion Failed: $2', 'color: #f44336; font-weight: 600', $3);",
+      "$0"
+    ],
+    "description": "Assert condition and log styled message if false"
+  },
+  "Add JSDoc for Constant Type": {
+    "prefix": "jsdoc-const",
+    "body": [
+      "/** @type {const} $1 */",
+      "const ${2:CONSTANT_NAME} = $3;"
+    ],
+    "description": "Add JSDoc with constant type annotation"
+  },
+  "React Context Reducer Pattern": {
+    "prefix": "react-context",
+    "body": [
+      "// #step 1: create the context",
+      "import { createContext, useReducer } from 'react';",
+      "",
+      "export const ${1:MyContext} = createContext(null);",
+      "",
+      "// #step 2: Put state and dispatch into context",
+      "const initState = {",
+      "  key1: '${2:value1}',",
+      "  key2: '${3:value2}',",
+      "};",
+      "",
+      "const ACTIONS = {",
+      "  ACTION_TYPE1: 'ACTION_TYPE1',",
+      "  ACTION_TYPE2: 'ACTION_TYPE2',",
+      "};",
+      "",
+      "const reducerFn = (state, action) => {",
+      "  switch (action.type) {",
+      "    case ACTIONS.ACTION_TYPE1:",
+      "      return {",
+      "        ...state,",
+      "        key1: action.payload,",
+      "      };",
+      "",
+      "    case ACTIONS.ACTION_TYPE2:",
+      "      return {",
+      "        ...state,",
+      "        key2: action.payload,",
+      "      };",
+      "    default:",
+      "      return state;",
+      "  }",
+      "};",
+      "",
+      "export const ${4:MyProvider} = (props) => {",
+      "  const [state, dispatch] = useReducer(reducerFn, initState);",
+      "",
+      "  return (",
+      "    <${1:MyContext}.Provider value={[state, dispatch]}>",
+      "      {props.children}",
+      "    </${1:MyContext}.Provider>",
+      "  );",
+      "};",
+      "",
+      "// #step 3: use the context in the component",
+      "import { useContext, useDebugValue } from 'react';",
+      "",
+      "export const use${5:MyContext} = () => {",
+      "  const context = useContext(${1:MyContext});",
+      "  useDebugValue(context, `is context wrapped: ${!!context}`);",
+      "  if (context === undefined) {",
+      "    throw new Error(`use${5:MyContext} must be used within a ${4:MyProvider}`);",
+      "  }",
+      "  return context;",
+      "};"
+    ],
+    "description": "React Context API with Reducer Boilerplate"
+  }
+}
