@@ -1,7 +1,13 @@
 [tools]
+aube = "latest"
 bun = "latest"
 ghq = "latest"
-node = "latest"
-python = "latest"
+node = { version = "24", postinstall = "cat ~/.default-npm-packages | xargs npm install -g && if [ -d ~/.nemoclaw/source ]; then (cd ~/.nemoclaw/source && npm link); fi" }
+pnpm = "latest"
+python = { version = "latest", postinstall = "pip install -r ~/.default-python-packages" }
 ruby = "latest"
 rust = "latest"
+
+[settings]
+idiomatic_version_file = true
+not_found_auto_install = true
