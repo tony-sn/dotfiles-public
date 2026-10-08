@@ -1,3 +1,6 @@
+# Common user binaries
+fish_add_path ~/.local/share/bob/nvim-bin ~/.local/bin ~/bin ~/.opencode/bin /opt/homebrew/bin
+
 if type -q eza
   alias ll "eza -l -g --icons"
   alias lla "ll -a"
