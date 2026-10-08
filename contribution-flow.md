@@ -44,3 +44,20 @@ never my `mine:*` commits or local configs.
 | Machine-local files (e.g. `fish_plugins`) | repo paths | `.git/info/exclude` — local-only ignore, never pushed |
 
 Rule of thumb: use these extension points **before** editing any tracked file.
+
+## Side note: stash audit (2026-03)
+
+Before adopting this flow, local changes lived in a `git stash` for months.
+When it was applied and reconciled, only 3 files differed from the stash — all
+intentional:
+
+| File | Why it differs | Safe? |
+|------|---------------|-------|
+| `.gitconfig` | Resolved to Takuya's version; identity/credentials moved to `~/.gitconfig.private` | ✅ by design |
+| `config-linux.fish` | Secrets block moved to `config-local.fish` (verified still loading) | ✅ by design |
+| `completions/openclaw.fish` | Stash held an old 1-line symlink stub; disk has the full generated completion (3,813 lines) — disk is newer, and it's an auto-generated ignored file anyway | ✅ disk wins |
+
+The other 63 stash files were byte-identical to disk (committed as `mine(*)`
+commits or kept as ignored local files), so the stash was dropped. Lesson:
+**prefer `mine(*)` commits over stashes** — commits survive rebases and syncs;
+stashes are easy to forget.
